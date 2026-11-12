@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sit at the Lord’s Feet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Josefin+Sans:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap">
+<style>
+:root{
+  /* Layout: sticky header over banded sections. Hero pairs the title with an arched, blush-tinted photo frame; four small flower sprigs are pinned to the viewport corners. */
+  --paper:#FFFDF9;
+  --white:#FFFFFF;
+  --blush:#F7DDE2;
+  --blush-soft:#FCEEF0;
+  --blush-deep:#E3A0B1;
+  --rose:#A94862;
+  --butter:#F4D77B;
+  --butter-soft:#FCF3D0;
+  --butter-deep:#C9A22E;
+  --ink:#4A2F36;
+  --ink-soft:#775760;
+  --sage:#C9D4B6;
+  --sage-deep:#9CAE86;
+  --font-script:"Pinyon Script","Snell Roundhand",cursive;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:"Lora",Georgia,"Times New Roman",serif;
+  --font-label:"Josefin Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden],.scrim[hidden],.toast[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.7;-webkit-text-size-adjust:100%;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:41}
+a{color:var(--rose);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.muted{color:var(--ink-soft)}
+.eyebrow{font-family:var(--font-label);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:600}
+
+/* corner flowers */
+.corner{position:fixed;width:clamp(58px,8vw,116px);aspect-ratio:1;pointer-events:none;z-index:60}
+.corner svg{display:block;width:100%;height:100%}
+.c-tl{top:env(safe-area-inset-top,0px);left:env(safe-area-inset-left,0px)}
+.c-tr{top:env(safe-area-inset-top,0px);right:env(safe-area-inset-right,0px)}
+.c-tr svg{transform:scaleX(-1)}
+.c-bl{bottom:env(safe-area-inset-bottom,0px);left:env(safe-area-inset-left,0px)}
+.c-bl svg{transform:scaleY(-1)}
+.c-br{bottom:env(safe-area-inset-bottom,0px);right:env(safe-area-inset-right,0px)}
+.c-br svg{transform:scale(-1,-1)}
+.pet{fill:var(--white);stroke:var(--blush-deep);stroke-width:1}
+.eye{fill:var(--butter);stroke:var(--butter-deep);stroke-width:.8}
+.leaf{fill:var(--sage);stroke:var(--sage-deep);stroke-width:.6}
+.stem{fill:none;stroke:var(--sage-deep);stroke-width:1.2;stroke-linecap:round}
+
+/* header */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:1px solid var(--blush)}
+.nav-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding-top:8px;padding-bottom:4px;padding-left:max(58px,env(safe-area-inset-left,0px));padding-right:max(58px,env(safe-area-inset-right,0px))}
+.brand{font-family:var(--font-script);font-size:1.55rem;color:var(--rose);text-decoration:none;line-height:1.2;white-space:nowrap;order:1}
+.auth{display:flex;align-items:center;gap:8px;order:2}
+.links{order:3;flex-basis:100%;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 -40px;padding:0 40px 6px}
+.links::-webkit-scrollbar{display:none}
+.links a{font-family:var(--font-label);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:.55em .75em;white-space:nowrap;border-bottom:1px solid transparent}
+.links a:hover{border-bottom-color:var(--blush-deep);color:var(--rose)}
+.show-wide{display:none}
+@media (min-width:640px){.show-wide{display:inline-flex}}
+@media (min-width:980px){
+  .nav-inner{flex-wrap:nowrap;padding-bottom:8px}
+  .links{order:2;flex-basis:auto;margin:0;padding:0;overflow:visible}
+  .auth{order:3}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-family:var(--font-label);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;color:var(--white);background:var(--rose);border:1px solid var(--rose);border-radius:4px;padding:.85em 1.4em;outline:1px solid var(--rose);outline-offset:3px;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.btn.ghost{background:transparent;color:var(--rose);outline-color:transparent}
+.btn.ghost:hover{background:var(--blush);color:var(--ink);border-color:var(--rose)}
+.btn.small{padding:.6em 1em;font-size:.68rem;outline:none}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.who{display:flex;align-items:center;gap:8px;font-family:var(--font-label);font-size:.78rem;color:var(--ink)}
+.dot{width:30px;height:30px;border-radius:50%;background:var(--blush);border:1px solid var(--blush-deep);display:grid;place-items:center;font-family:var(--font-display);font-weight:600;font-size:1rem;color:var(--rose)}
+.who-name{max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (min-width:640px){.who-name{max-width:16ch}}
+
+/* sections */
+.band{padding-block:clamp(48px,8vw,88px);scroll-margin-top:96px}
+.band.soft{background:var(--blush-soft)}
+.band.sun{background:var(--butter-soft)}
+.sec-head{display:grid;gap:10px;max-width:640px;margin-bottom:clamp(26px,4vw,40px)}
+.sec-head h2{font-size:clamp(2.1rem,5.6vw,3.2rem)}
+.sec-head p{color:var(--ink-soft)}
+.orn{display:flex;align-items:center;gap:10px;max-width:260px;margin-top:4px}
+.orn::before,.orn::after{content:"";height:1px;flex:1;background:var(--butter-deep);opacity:.7}
+.orn svg{width:26px;height:26px;flex:none}
+
+.card{background:var(--white);border:1px solid var(--butter);border-radius:6px;padding:22px;outline:1px solid var(--blush);outline-offset:-7px;min-width:0}
+
+/* hero */
+.hero{padding-block:clamp(34px,6vw,70px) clamp(48px,8vw,84px);background:radial-gradient(ellipse at 75% 20%,var(--blush-soft) 0,var(--paper) 62%)}
+.hero-grid{display:grid;gap:36px;align-items:center}
+@media (min-width:860px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:56px}}
+.hero h1{font-family:var(--font-script);font-weight:400;font-size:clamp(3rem,10vw,5.6rem);line-height:1.02;color:var(--rose);margin:10px 0 14px}
+.hero .sub{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(1.3rem,3.4vw,1.75rem);line-height:1.35;color:var(--ink);max-width:30ch}
+.hero .lead{margin-top:14px;max-width:52ch;color:var(--ink-soft)}
+.cta{display:flex;flex-wrap:wrap;gap:16px 18px;margin-top:28px}
+.welcome{margin-top:18px;font-family:var(--font-display);font-size:1.25rem;color:var(--rose);font-style:italic}
+.frame{margin:0;justify-self:center;width:min(100%,340px)}
+.arch{background:var(--blush);border-radius:999px 999px 10px 10px;overflow:hidden;outline:1px solid var(--butter-deep);outline-offset:8px;aspect-ratio:2/3}
+.arch img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.frame figcaption{margin-top:22px;text-align:center;font-family:var(--font-display);font-style:italic;font-size:1.15rem;line-height:1.4;color:var(--ink-soft)}
+
+/* verse of the day */
+.votd{padding-block:clamp(30px,5vw,48px);background:var(--butter-soft);text-align:center}
+.votd blockquote{margin:12px auto 10px;max-width:34em;font-family:var(--font-display);font-size:clamp(1.4rem,3.6vw,2rem);line-height:1.4;font-style:italic;font-weight:500;text-wrap:balance}
+.votd cite{font-style:normal;font-family:var(--font-label);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
+
+/* reading */
+.reader{display:grid;gap:20px}
+@media (min-width:860px){.reader{grid-template-columns:270px minmax(0,1fr);gap:30px;align-items:start}}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+@media (min-width:860px){.tabs{flex-direction:column;flex-wrap:nowrap}}
+.tab{font:inherit;text-align:left;cursor:pointer;background:var(--white);color:var(--ink);border:1px solid var(--blush-deep);border-radius:4px;padding:10px 14px;display:grid;gap:0;transition:background .2s}
+.tab b{font-family:var(--font-display);font-size:1.15rem;font-weight:600;line-height:1.2}
+.tab span{font-family:var(--font-label);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tab:hover{background:var(--blush-soft)}
+.tab[aria-selected="true"]{background:var(--butter);border-color:var(--butter-deep)}
+.tab[aria-selected="true"] span{color:var(--ink)}
+.panel h3{font-size:clamp(1.8rem,4vw,2.4rem)}
+.panel .refline{margin-top:4px}
+.scripture{margin:20px 0;padding:0;display:grid;gap:8px;font-family:var(--font-display);font-size:1.28rem;line-height:1.5;font-weight:500}
+.scripture sup{font-family:var(--font-label);font-size:.62rem;color:var(--rose);margin-right:.35em;letter-spacing:.04em}
+.panel h4{font-family:var(--font-label);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin:22px 0 6px;font-weight:600}
+.panel .refl{display:grid;gap:12px;max-width:62ch}
+.pray{margin-top:22px;background:var(--butter-soft);border-radius:4px;padding:16px 18px;font-style:italic}
+.pray b{font-family:var(--font-label);font-style:normal;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:4px}
+.ref{font-family:var(--font-label);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+
+/* music */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.artist{display:flex;flex-direction:column;gap:8px}
+.artist h3{font-size:1.75rem}
+.artist h3 a{text-decoration:none;color:var(--ink);border-bottom:1px solid var(--blush-deep)}
+.artist h3 a:hover{color:var(--rose)}
+.songs{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
+.songs li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:.95rem;font-style:italic}
+.songs a{font-family:var(--font-label);font-style:normal;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px}
+.pill{font-family:var(--font-label);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;text-decoration:none;color:var(--rose);border:1px solid var(--blush-deep);background:var(--paper);border-radius:999px;padding:.5em 1.1em}
+.pill:hover{background:var(--blush);color:var(--ink)}
+.practice{margin-top:30px;display:grid;gap:14px;max-width:760px}
+.practice ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+/* books */
+.book{display:flex;flex-direction:column;gap:6px}
+.tagline{font-family:var(--font-label);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:600}
+.book h3{font-size:1.55rem}
+.book .by{font-style:italic;color:var(--ink-soft)}
+.book p.blurb{font-size:.97rem}
+.book .pills{margin-top:auto}
+
+/* feelings */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.chip{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--blush-deep);border-radius:999px;padding:.35em 1.1em;cursor:pointer;transition:background .2s}
+.chip:hover{background:var(--blush)}
+.chip[aria-pressed="true"]{background:var(--blush-deep);border-color:var(--rose);color:var(--ink)}
+.feel{display:grid;gap:18px}
+.feel .lead{font-family:var(--font-display);font-size:clamp(1.5rem,3.6vw,2rem);font-style:italic;font-weight:500;max-width:34ch;line-height:1.3}
+.vcards{display:grid;gap:18px}
+@media (min-width:760px){.vcards{grid-template-columns:1fr 1fr}}
+.vcards blockquote{margin:0 0 10px;font-family:var(--font-display);font-size:1.3rem;line-height:1.5;font-weight:500}
+
+/* overthinking */
+.ot{display:grid;gap:26px}
+@media (min-width:900px){.ot{grid-template-columns:1.1fr .9fr;align-items:start;gap:40px}}
+.anchors{display:grid;gap:14px}
+.anchors blockquote{margin:0;padding:0;font-family:var(--font-display);font-size:1.3rem;line-height:1.5;font-weight:500}
+.anchors blockquote .ref{display:block;margin-top:2px}
+.steps{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:16px;counter-reset:s}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{counter-increment:s;background:var(--white);border:1px solid var(--butter);border-radius:6px;padding:18px 18px 18px;display:grid;gap:6px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--font-display);font-size:2.2rem;line-height:1;color:var(--butter-deep);font-weight:600}
+.steps h3{font-size:1.35rem}
+.steps p{font-size:.96rem}
+.lay label,.field label{display:block;font-family:var(--font-label);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--rose);margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--white);border:1px solid var(--blush-deep);border-radius:4px;padding:.65em .8em}
+textarea{resize:vertical;min-height:110px}
+::placeholder{color:#9b8086}
+.lay .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
+.laid{display:grid;gap:12px}
+.laid h3{font-size:1.9rem}
+.laid blockquote{margin:0;font-family:var(--font-display);font-size:1.3rem;line-height:1.5;font-weight:500}
+
+/* community */
+.com{display:grid;gap:26px}
+@media (min-width:960px){.com{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start;gap:34px}}
+.kinds{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.kinds label{margin:0;cursor:pointer}
+.kinds input{position:absolute;opacity:0;width:1px;height:1px}
+.kinds span{display:inline-block;font-family:var(--font-label);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:1px solid var(--blush-deep);border-radius:999px;padding:.5em 1em;background:var(--white);color:var(--ink)}
+.kinds input:checked+span{background:var(--butter);border-color:var(--butter-deep)}
+.kinds input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.counter{font-family:var(--font-label);font-size:.72rem;color:var(--ink-soft);letter-spacing:.06em}
+.note{background:var(--blush-soft);border-radius:4px;padding:12px 14px;font-size:.95rem;color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}
+.filters button{font-family:var(--font-label);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:1px solid var(--blush-deep);border-radius:999px;padding:.45em 1em;background:var(--white);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--blush-deep);border-color:var(--rose)}
+.msgs{display:grid;gap:0}
+.msg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px dashed var(--blush-deep)}
+.msg .dot{grid-row:span 2;width:38px;height:38px}
+.msg .meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;font-size:.9rem}
+.msg .meta b{font-family:var(--font-display);font-size:1.15rem}
+.msg .when{color:var(--ink-soft);font-size:.82rem}
+.msg .body{white-space:pre-wrap;overflow-wrap:anywhere}
+.msg .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
+.tag{font-family:var(--font-label);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;border-radius:999px;padding:.25em .8em;border:1px solid var(--blush-deep);background:var(--blush-soft)}
+.tag.prayer{background:var(--blush)}
+.tag.testimony{background:var(--butter-soft);border-color:var(--butter-deep)}
+.linkbtn{font:inherit;font-size:.82rem;background:none;border:0;color:var(--rose);text-decoration:underline;cursor:pointer;padding:0}
+.empty{padding:28px 0;color:var(--ink-soft);font-style:italic}
+.guide{margin:0;padding-left:1.1em;display:grid;gap:8px}
+.stat{font-family:var(--font-display);font-size:2.6rem;line-height:1;color:var(--rose);font-weight:600}
+
+footer{background:var(--blush);padding-block:44px 64px;text-align:center}
+footer .brand{font-size:2.2rem;display:inline-block}
+footer p{max-width:52ch;margin:8px auto 0;color:var(--ink)}
+footer .small{font-size:.85rem;color:var(--ink-soft)}
+
+/* dialog */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(74,47,54,.5);display:grid;place-items:center;overflow-y:auto;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dialog{position:relative;width:min(100%,430px);background:var(--paper);border:1px solid var(--butter-deep);border-radius:8px;outline:1px solid var(--blush-deep);outline-offset:-8px;padding:30px 28px 28px}
+.dialog .x{position:absolute;top:10px;right:12px;font:inherit;font-size:1.6rem;line-height:1;background:none;border:0;color:var(--ink-soft);cursor:pointer;padding:4px 8px}
+.dialog h2{font-family:var(--font-script);font-weight:400;font-size:2.3rem;color:var(--rose);text-align:center;line-height:1.1}
+.dialog .seg{display:flex;gap:8px;margin:16px 0 18px}
+.dialog .seg button{flex:1;font-family:var(--font-label);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:.7em;border:1px solid var(--blush-deep);background:var(--white);color:var(--ink);border-radius:4px;cursor:pointer}
+.dialog .seg button[aria-selected="true"]{background:var(--butter);border-color:var(--butter-deep)}
+.dialog form,.dialog .pane{display:grid;gap:14px}
+.fine{font-size:.82rem;color:var(--ink-soft);line-height:1.5}
+.err{color:var(--rose);font-size:.9rem}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:var(--white);padding:.7em 1.3em;border-radius:999px;font-size:.92rem;max-width:calc(100vw - 32px);text-align:center}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="bloom" viewBox="-20 -20 40 40">
+      <g class="pet">
+        <ellipse cx="0" cy="-10" rx="6.5" ry="10"/>
+        <ellipse cx="0" cy="-10" rx="6.5" ry="10" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-10" rx="6.5" ry="10" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-10" rx="6.5" ry="10" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-10" rx="6.5" ry="10" transform="rotate(288)"/>
+      </g>
+      <circle class="eye" r="4.2"/>
+    </symbol>
+    <symbol id="sprig" viewBox="0 0 160 160">
+      <path class="stem" d="M-6 -6 C 30 14, 62 40, 120 54"/>
+      <path class="stem" d="M-6 -6 C 14 30, 40 62, 54 120"/>
+      <ellipse class="leaf" cx="44" cy="26" rx="10" ry="4" transform="rotate(28 44 26)"/>
+      <ellipse class="leaf" cx="80" cy="42" rx="9" ry="3.5" transform="rotate(22 80 42)"/>
+      <ellipse class="leaf" cx="26" cy="44" rx="10" ry="4" transform="rotate(62 26 44)"/>
+      <ellipse class="leaf" cx="42" cy="80" rx="9" ry="3.5" transform="rotate(68 42 80)"/>
+      <use href="#bloom" x="12" y="12" width="48" height="48"/>
+      <use href="#bloom" x="62" y="4" width="30" height="30"/>
+      <use href="#bloom" x="4" y="62" width="30" height="30"/>
+      <use href="#bloom" x="66" y="52" width="22" height="22"/>
+      <use href="#bloom" x="52" y="66" width="22" height="22"/>
+      <use href="#bloom" x="104" y="26" width="18" height="18"/>
+      <use href="#bloom" x="26" y="104" width="18" height="18"/>
+      <use href="#bloom" x="112" y="54" width="14" height="14"/>
+      <use href="#bloom" x="54" y="112" width="14" height="14"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="corner c-tl" aria-hidden="true"><svg viewBox="0 0 160 160"><use href="#sprig"/></svg></div>
+<div class="corner c-tr" aria-hidden="true"><svg viewBox="0 0 160 160"><use href="#sprig"/></svg></div>
+<div class="corner c-bl" aria-hidden="true"><svg viewBox="0 0 160 160"><use href="#sprig"/></svg></div>
+<div class="corner c-br" aria-hidden="true"><svg viewBox="0 0 160 160"><use href="#sprig"/></svg></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Sit at the Lord’s Feet</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#scripture">Scripture</a>
+      <a href="#music">Music</a>
+      <a href="#books">Books</a>
+      <a href="#feelings">How you feel</a>
+      <a href="#overthinking">Overthinking</a>
+      <a href="#community">Community</a>
+    </nav>
+    <div class="auth" id="authArea"></div>
+  </div>
+</header>
+
+<noscript><p style="background:#FCF3D0;color:#4A2F36;padding:10px 18px;text-align:center;font-size:.9rem">You are viewing a simple preview. For sign in and the community chat, open this page in Safari or Chrome.</p></noscript>
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">A quiet place to draw near</p>
+        <h1>Sit at the Lord’s Feet</h1>
+        <p class="sub">Come as you are. Rest a while, read His word, and let Him lead the way.</p>
+        <p class="lead">Here you will find Scripture with plain-language reflections, worship songs for stillness, books that point you to Christ, encouragement for whatever you are feeling today, and believers from around the world to walk alongside.</p>
+        <div class="cta">
+          <a class="btn" href="#scripture">Begin reading</a>
+          <button class="btn ghost" type="button" data-open-auth="up">Sign up</button>
+        </div>
+        <p class="welcome" id="welcome" hidden></p>
+      </div>
+      <figure class="frame">
+        <!-- Optional photo: add a picture named "jesus and you.jpg" next to this file and it will show here. Without it, a flower is shown. -->
+        <div class="arch" style="position:relative"><svg viewBox="-20 -20 40 40" aria-hidden="true" style="position:absolute;inset:0;margin:auto;width:70%;height:auto"><use href="#bloom"/></svg><img src="jesus%20and%20you.jpg" width="490" height="735" alt="Two hands reaching toward each other in black and white: one lowered from a white robe, one lifted from a denim sleeve." onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" style="position:relative"></div>
+        <figcaption>“Draw nigh to God, and he will draw nigh to you.” <a class="ref" href="https://www.biblegateway.com/passage/?search=James%204%3A8&amp;version=KJV" target="_blank" rel="noopener">James 4:8</a></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="votd" aria-labelledby="votdLabel">
+    <div class="wrap">
+      <p class="eyebrow" id="votdLabel">Verse for today</p>
+      <blockquote id="votdText">Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore.</blockquote>
+      <cite id="votdRef"><a href="https://www.biblegateway.com/passage/?search=Psalm%2016%3A11&amp;version=KJV" target="_blank" rel="noopener">Psalm 16:11</a></cite>
+    </div>
+  </section>
+
+  <section class="band" id="scripture">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Scripture &amp; reflection</p>
+        <h2>Read, then sit with it</h2>
+        <p>Short passages with a few honest words on what they mean and how to pray them back. Tap any reference to open the full chapter.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="reader">
+        <div class="tabs" role="tablist" aria-label="Passages" id="readTabs"></div>
+        <article class="card panel" id="readPanel" role="tabpanel" aria-live="polite"></article><noscript><div style="display:grid;gap:18px"><article class="card panel"><h3>Sit at His feet</h3><p class="refline"><a class="ref" href="https://www.biblegateway.com/passage/?search=Luke%2010%3A39-42&amp;version=KJV" target="_blank" rel="noopener">Luke 10:39–42</a> <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0"><span><sup>39</sup>And she had a sister called Mary, which also sat at Jesus’ feet, and heard his word.</span><span><sup>40</sup>But Martha was cumbered about much serving, and came to him, and said, Lord, dost thou not care that my sister hath left me to serve alone? bid her therefore that she help me.</span><span><sup>41</sup>And Jesus answered and said unto her, Martha, Martha, thou art careful and troubled about many things:</span><span><sup>42</sup>But one thing is needful: and Mary hath chosen that good part, which shall not be taken away from her.</span></blockquote><h4>Reflection</h4><div class="refl"><p>Martha was not wrong to serve. Jesus’ gentle answer was about where her heart had gone: she was anxious and pulled in many directions while the One she was serving sat in the next room. Mary did the simplest thing. She sat, and she listened.</p><p>Sitting at His feet is not laziness. It is the place everything else flows from. Before you plan the day, pray over it. Before you fix the problem, listen. The “one thing” is not a task to add to your list. It is a Person to stay near.</p></div><div class="pray"><b>Pray it back</b>Lord, slow me down. Teach me to sit before I serve, and to hear Your voice above my to-do list.</div></article><article class="card panel"><h3>The Shepherd who stays</h3><p class="refline"><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%2023%3A1-4&amp;version=KJV" target="_blank" rel="noopener">Psalm 23:1–4</a> <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0"><span><sup>1</sup>The LORD is my shepherd; I shall not want.</span><span><sup>2</sup>He maketh me to lie down in green pastures: he leadeth me beside the still waters.</span><span><sup>3</sup>He restoreth my soul: he leadeth me in the paths of righteousness for his name’s sake.</span><span><sup>4</sup>Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.</span></blockquote><h4>Reflection</h4><div class="refl"><p>David wrote as someone who knew sheep. Sheep cannot rest unless they feel safe, so lying down in green pastures is a picture of trust, not of having nothing to do. The Shepherd leads, restores and stays close.</p><p>Notice the shift in verse 4. In the pasture David speaks about God (“he”). In the dark valley he speaks to Him (“thou”). When the road is hardest, stop talking about God and start talking to Him.</p></div><div class="pray"><b>Pray it back</b>Shepherd of my soul, lead me today. In the green places I thank You, and in the dark valleys I will not fear, because You are with me.</div></article><article class="card panel"><h3>Abide in Him</h3><p class="refline"><a class="ref" href="https://www.biblegateway.com/passage/?search=John%2015%3A4-5&amp;version=KJV" target="_blank" rel="noopener">John 15:4–5</a> <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0"><span><sup>4</sup>Abide in me, and I in you. As the branch cannot bear fruit of itself, except it abide in the vine; no more can ye, except ye abide in me.</span><span><sup>5</sup>I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing.</span></blockquote><h4>Reflection</h4><div class="refl"><p>A branch does not strain to make fruit. It stays attached, and the life of the vine does the work. Jesus uses this picture to say that a fruitful life grows from closeness, not from effort alone.</p><p>Abiding is ordinary and daily: reading His word, praying as you walk, obeying the small prompt, coming back when you drift. If you feel dry, do not try harder first. Reconnect first.</p></div><div class="pray"><b>Pray it back</b>Jesus, I stay close to You today. Be the life in me, and make my small obedience fruitful.</div></article><article class="card panel"><h3>Come and rest</h3><p class="refline"><a class="ref" href="https://www.biblegateway.com/passage/?search=Matthew%2011%3A28-30&amp;version=KJV" target="_blank" rel="noopener">Matthew 11:28–30</a> <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0"><span><sup>28</sup>Come unto me, all ye that labour and are heavy laden, and I will give you rest.</span><span><sup>29</sup>Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls.</span><span><sup>30</sup>For my yoke is easy, and my burden is light.</span></blockquote><h4>Reflection</h4><div class="refl"><p>Jesus does not say, “Come to me when you are put together.” He says come if you are tired and carrying too much. A yoke joins two animals so the load is shared. The invitation is to walk beside Him and learn His pace.</p><p>His rest is not an escape from responsibility. It is the lightness of not carrying everything alone, and of being led by someone gentle and humble in heart.</p></div><div class="pray"><b>Pray it back</b>Jesus, I am tired. I come to You with what I have been carrying. Teach me Your pace and give me rest for my soul.</div></article><article class="card panel"><h3>Be still</h3><p class="refline"><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%2046%3A1%2C%2010&amp;version=KJV" target="_blank" rel="noopener">Psalm 46:1, 10</a> <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0"><span><sup>1</sup>God is our refuge and strength, a very present help in trouble.</span><span><sup>10</sup>Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.</span></blockquote><h4>Reflection</h4><div class="refl"><p>“Be still” can carry the sense of letting go, of loosening your grip. It sits in a psalm full of shaking mountains and roaring seas. God’s steadiness does not depend on calm circumstances.</p><p>Try it for two minutes. Put the phone down, breathe slowly, and repeat the verse, dropping a word each time until only “Be still” remains.</p></div><div class="pray"><b>Pray it back</b>Father, I let go. You are my refuge and my strength. Quiet my heart so I can know You.</div></article></div></noscript>
+      </div>
+    </div>
+  </section>
+
+  <section class="band soft" id="music">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Songs to meditate on</p>
+        <h2>Worship for the quiet hours</h2>
+        <p>Tap an artist’s name to hear them on YouTube, or use the buttons to open YouTube or Spotify. Links open in a new tab.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="grid g3" id="artistGrid"><article class="card artist"><p class="eyebrow">Anthems of hope</p><h3><a href="https://www.youtube.com/results?search_query=We%20The%20Kingdom%20worship" target="_blank" rel="noopener">We The Kingdom</a></h3><p class="muted">Warm, singable songs for mornings and long drives.</p><ul class="songs"><li><span>Holy Water</span><a href="https://www.youtube.com/results?search_query=We%20The%20Kingdom%20Holy%20Water" target="_blank" rel="noopener">YouTube</a><a href="https://open.spotify.com/search/We%20The%20Kingdom%20Holy%20Water" target="_blank" rel="noopener">Spotify</a></li></ul><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=We%20The%20Kingdom%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/We%20The%20Kingdom" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Honest and gentle</p><h3><a href="https://www.youtube.com/results?search_query=Josiah%20Queen%20worship" target="_blank" rel="noopener">Josiah Queen</a></h3><p class="muted">Reflective songs that sit well with a journal and a quiet room.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Josiah%20Queen%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Josiah%20Queen" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Soft and prayerful</p><h3><a href="https://www.youtube.com/results?search_query=Abbie%20Gamboa%20worship" target="_blank" rel="noopener">Abbie Gamboa</a></h3><p class="muted">Gentle vocals for winding down at night.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Abbie%20Gamboa%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Abbie%20Gamboa" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Quiet and unhurried</p><h3><a href="https://www.youtube.com/results?search_query=Claire%20Leslie%20Strings%20and%20Hearts%20worship" target="_blank" rel="noopener">Claire Leslie · Strings and Hearts</a></h3><p class="muted">Slow, prayerful listening for still evenings.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Claire%20Leslie%20Strings%20and%20Hearts%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Claire%20Leslie%20Strings%20and%20Hearts" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Congregational praise</p><h3><a href="https://www.youtube.com/results?search_query=Hillsong%20Worship%20worship" target="_blank" rel="noopener">Hillsong</a></h3><p class="muted">Songs made to be sung together, from hushed to full-throated.</p><ul class="songs"><li><span>Oceans (Where Feet May Fail)</span><a href="https://www.youtube.com/results?search_query=Hillsong%20Oceans%20Where%20Feet%20May%20Fail" target="_blank" rel="noopener">YouTube</a><a href="https://open.spotify.com/search/Hillsong%20Oceans%20Where%20Feet%20May%20Fail" target="_blank" rel="noopener">Spotify</a></li><li><span>What a Beautiful Name</span><a href="https://www.youtube.com/results?search_query=Hillsong%20What%20a%20Beautiful%20Name" target="_blank" rel="noopener">YouTube</a><a href="https://open.spotify.com/search/Hillsong%20What%20a%20Beautiful%20Name" target="_blank" rel="noopener">Spotify</a></li></ul><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Hillsong%20Worship%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Hillsong%20Worship" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Prayerful worship</p><h3><a href="https://www.youtube.com/results?search_query=Tiffany%20Hudson%20worship" target="_blank" rel="noopener">Tiffany Hudson</a></h3><p class="muted">Worship you can pray along with.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Tiffany%20Hudson%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Tiffany%20Hudson" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Church family worship</p><h3><a href="https://www.youtube.com/results?search_query=2819%20Worship%20Team%20worship" target="_blank" rel="noopener">2819 Worship Team</a></h3><p class="muted">Worship from a church family, good for singing along.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=2819%20Worship%20Team%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/2819%20Worship%20Team" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Lifted spirits</p><h3><a href="https://www.youtube.com/results?search_query=Elevation%20Rhythm%20worship" target="_blank" rel="noopener">Elevation Rhythm</a></h3><p class="muted">Fresh, modern worship for when you need your joy lifted.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Elevation%20Rhythm%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Elevation%20Rhythm" target="_blank" rel="noopener">Spotify ↗</a></div></article><article class="card artist"><p class="eyebrow">Soft and sincere</p><h3><a href="https://www.youtube.com/results?search_query=Chelsea%20Plank%20worship" target="_blank" rel="noopener">Chelsea Plank</a></h3><p class="muted">Simple worship songs for still moments.</p><div class="pills"><a class="pill" href="https://www.youtube.com/results?search_query=Chelsea%20Plank%20worship" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="https://open.spotify.com/search/Chelsea%20Plank" target="_blank" rel="noopener">Spotify ↗</a></div></article></div>
+      <div class="card practice">
+        <p class="eyebrow">A way to listen</p>
+        <ol>
+          <li>Choose one song and put your phone face down.</li>
+          <li>Listen once through with your eyes closed.</li>
+          <li>Write down the line that stayed with you, then pray it back to God in your own words.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band sun" id="books">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Christian book recommendations</p>
+        <h2>Books to grow with</h2>
+        <p>A mix of enduring classics and gentle modern reads. Each link searches Goodreads so you can find a copy near you.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="grid g3" id="bookGrid"><article class="card book"><p class="tagline">A classic</p><h3>Mere Christianity</h3><p class="by">by C. S. Lewis</p><p class="blurb">A clear, warm case for the Christian faith, written for people with honest questions.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=Mere%20Christianity%20C.%20S.%20Lewis" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">Go deeper</p><h3>Knowing God</h3><p class="by">by J. I. Packer</p><p class="blurb">A thoughtful walk through who God is, and why knowing Him changes everything.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=Knowing%20God%20J.%20I.%20Packer" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">For anxious days</p><h3>Anxious for Nothing</h3><p class="by">by Max Lucado</p><p class="blurb">Encouragement from Philippians 4 for a worried heart, in short, easy chapters.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=Anxious%20for%20Nothing%20Max%20Lucado" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">For overthinking</p><h3>Battlefield of the Mind</h3><p class="by">by Joyce Meyer</p><p class="blurb">Practical help for tangled thinking and learning to take thoughts to God.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=Battlefield%20of%20the%20Mind%20Joyce%20Meyer" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">Short and quiet</p><h3>The Practice of the Presence of God</h3><p class="by">by Brother Lawrence</p><p class="blurb">A short, old, lovely book on turning ordinary chores into conversation with God.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=The%20Practice%20of%20the%20Presence%20of%20God%20Brother%20Lawrence" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">Daily reading</p><h3>My Utmost for His Highest</h3><p class="by">by Oswald Chambers</p><p class="blurb">A daily devotional that has fed readers for over a century.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=My%20Utmost%20for%20His%20Highest%20Oswald%20Chambers" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">A story for the soul</p><h3>Hinds’ Feet on High Places</h3><p class="by">by Hannah Hurnard</p><p class="blurb">An allegory of a fearful girl who follows the Shepherd to the heights.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=Hinds%E2%80%99%20Feet%20on%20High%20Places%20Hannah%20Hurnard" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">For doubters</p><h3>The Case for Christ</h3><p class="by">by Lee Strobel</p><p class="blurb">A journalist’s investigation of the evidence for Jesus, good for doubts and questions.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=The%20Case%20for%20Christ%20Lee%20Strobel" target="_blank" rel="noopener">Find this book ↗</a></div></article><article class="card book"><p class="tagline">A classic</p><h3>The Pilgrim’s Progress</h3><p class="by">by John Bunyan</p><p class="blurb">A beloved journey of faith from the City of Destruction to the Celestial City.</p><div class="pills"><a class="pill" href="https://www.goodreads.com/search?q=The%20Pilgrim%E2%80%99s%20Progress%20John%20Bunyan" target="_blank" rel="noopener">Find this book ↗</a></div></article></div>
+    </div>
+  </section>
+
+  <section class="band" id="feelings">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Scripture for how you feel</p>
+        <h2>What is on your heart today?</h2>
+        <p>Choose the word that fits best. God meets you right where you are.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="chips" id="feelChips" role="group" aria-label="Feelings"></div>
+      <div class="feel" id="feelPanel" aria-live="polite"></div><noscript><div style="display:grid;gap:28px"><div class="feel"><h3 style="font-size:1.8rem">Anxious</h3><p class="lead">Your worry is not too heavy for Him. Say it plainly and leave it in His hands.</p><div class="vcards"><div class="card"><blockquote>Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Philippians%204%3A6-7&amp;version=KJV" target="_blank" rel="noopener">Philippians 4:6–7</a></div><div class="card"><blockquote>Casting all your care upon him; for he careth for you.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=1%20Peter%205%3A7&amp;version=KJV" target="_blank" rel="noopener">1 Peter 5:7</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Father, I give You what I cannot control. Guard my mind with Your peace.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Weary</h3><p class="lead">He invites the tired, not the finished. Rest is part of following Him.</p><div class="vcards"><div class="card"><blockquote>Come unto me, all ye that labour and are heavy laden, and I will give you rest.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Matthew%2011%3A28&amp;version=KJV" target="_blank" rel="noopener">Matthew 11:28</a></div><div class="card"><blockquote>But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Isaiah%2040%3A31&amp;version=KJV" target="_blank" rel="noopener">Isaiah 40:31</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Lord, I am worn out. Renew my strength as I wait on You.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Lonely</h3><p class="lead">You are seen. The One who made you has not stepped away.</p><div class="vcards"><div class="card"><blockquote>Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Deuteronomy%2031%3A6&amp;version=KJV" target="_blank" rel="noopener">Deuteronomy 31:6</a></div><div class="card"><blockquote>The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%2034%3A18&amp;version=KJV" target="_blank" rel="noopener">Psalm 34:18</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">God, help me feel Your nearness tonight, and lead me to people who will walk with me.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Afraid</h3><p class="lead">Fear is real, and so is His presence. You can be afraid and held at the same time.</p><div class="vcards"><div class="card"><blockquote>Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Isaiah%2041%3A10&amp;version=KJV" target="_blank" rel="noopener">Isaiah 41:10</a></div><div class="card"><blockquote>What time I am afraid, I will trust in thee.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%2056%3A3&amp;version=KJV" target="_blank" rel="noopener">Psalm 56:3</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Lord, when I am afraid I will trust You. Stay close and steady me.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Discouraged</h3><p class="lead">A slow season is not a failed one. Keep going, one faithful step at a time.</p><div class="vcards"><div class="card"><blockquote>Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Joshua%201%3A9&amp;version=KJV" target="_blank" rel="noopener">Joshua 1:9</a></div><div class="card"><blockquote>And let us not be weary in well doing: for in due season we shall reap, if we faint not.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Galatians%206%3A9&amp;version=KJV" target="_blank" rel="noopener">Galatians 6:9</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Father, lift my eyes. Give me courage for the next small step.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Grieving</h3><p class="lead">Your tears matter to Him. You do not have to hurry through this.</p><div class="vcards"><div class="card"><blockquote>He healeth the broken in heart, and bindeth up their wounds.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%20147%3A3&amp;version=KJV" target="_blank" rel="noopener">Psalm 147:3</a></div><div class="card"><blockquote>Blessed are they that mourn: for they shall be comforted.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Matthew%205%3A4&amp;version=KJV" target="_blank" rel="noopener">Matthew 5:4</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Comforter, sit with me in this sorrow. Bind up what is broken.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Ashamed</h3><p class="lead">In Christ the case is closed. Come back to Him without hiding.</p><div class="vcards"><div class="card"><blockquote>If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&amp;version=KJV" target="_blank" rel="noopener">1 John 1:9</a></div><div class="card"><blockquote>There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Romans%208%3A1&amp;version=KJV" target="_blank" rel="noopener">Romans 8:1</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Lord, I bring You everything. Thank You that Your mercy is bigger than my failure.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Grateful</h3><p class="lead">Gratitude turns the heart back toward the Giver. Take a moment to say thank you.</p><div class="vcards"><div class="card"><blockquote>This is the day which the LORD hath made; we will rejoice and be glad in it.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%20118%3A24&amp;version=KJV" target="_blank" rel="noopener">Psalm 118:24</a></div><div class="card"><blockquote>Rejoice evermore. Pray without ceasing. In every thing give thanks: for this is the will of God in Christ Jesus concerning you.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=1%20Thessalonians%205%3A16-18&amp;version=KJV" target="_blank" rel="noopener">1 Thessalonians 5:16–18</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Father, thank You. Open my eyes to notice every good thing You have given.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Doubting</h3><p class="lead">Honest doubt can be brought to Him. Ask, and keep asking.</p><div class="vcards"><div class="card"><blockquote>And straightway the father of the child cried out, and said with tears, Lord, I believe; help thou mine unbelief.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Mark%209%3A24&amp;version=KJV" target="_blank" rel="noopener">Mark 9:24</a></div><div class="card"><blockquote>If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=James%201%3A5&amp;version=KJV" target="_blank" rel="noopener">James 1:5</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Lord, I believe. Help my unbelief, and show me more of You.</span></div></div><div class="feel"><h3 style="font-size:1.8rem">Seeking direction</h3><p class="lead">He is a faithful guide. Take the next step you can see.</p><div class="vcards"><div class="card"><blockquote>Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Proverbs%203%3A5-6&amp;version=KJV" target="_blank" rel="noopener">Proverbs 3:5–6</a></div><div class="card"><blockquote>Thy word is a lamp unto my feet, and a light unto my path.</blockquote><a class="ref" href="https://www.biblegateway.com/passage/?search=Psalm%20119%3A105&amp;version=KJV" target="_blank" rel="noopener">Psalm 119:105</a></div></div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp">Father, light the next step. I trust You with the path ahead.</span></div></div></div></noscript>
+    </div>
+  </section>
+
+  <section class="band soft" id="overthinking">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">God’s answer to overthinking</p>
+        <h2>When your mind will not stop</h2>
+        <p>An overthinking mind is tired, not broken. Scripture does not tell you to think harder. It shows you who to hand the thoughts to, and what to do next.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="ot">
+        <div class="anchors">
+          <blockquote>Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.<a class="ref" href="https://www.biblegateway.com/passage/?search=Isaiah%2026%3A3&amp;version=KJV" target="_blank" rel="noopener">Isaiah 26:3</a></blockquote>
+          <blockquote>Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.<a class="ref" href="https://www.biblegateway.com/passage/?search=Philippians%204%3A6-7&amp;version=KJV" target="_blank" rel="noopener">Philippians 4:6–7</a></blockquote>
+          <blockquote>Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.<a class="ref" href="https://www.biblegateway.com/passage/?search=Matthew%206%3A34&amp;version=KJV" target="_blank" rel="noopener">Matthew 6:34</a></blockquote>
+        </div>
+        <div class="card lay" id="layBox">
+          <div id="layForm">
+            <label for="worry">What is circling in your mind?</label>
+            <textarea id="worry" maxlength="600" placeholder="Write it out here. It stays on this page and is never saved or sent anywhere."></textarea>
+            <div class="row"><button class="btn small" type="button" id="layBtn">Lay it down</button><span class="fine">Nothing you type here is stored.</span></div>
+          </div>
+          <div class="laid" id="laid" hidden>
+            <p class="eyebrow">It is with Him now</p>
+            <h3>You do not have to carry it tonight.</h3>
+            <blockquote>Casting all your care upon him; for he careth for you.<a class="ref" href="https://www.biblegateway.com/passage/?search=1%20Peter%205%3A7&amp;version=KJV" target="_blank" rel="noopener" style="display:block">1 Peter 5:7</a></blockquote>
+            <p><b>One small step:</b> <span id="smallStep"></span></p>
+            <div><button class="btn small ghost" type="button" id="againBtn">Write another</button></div>
+          </div>
+        </div>
+      </div>
+      <ol class="steps" aria-label="Six small steps">
+        <li><h3>Notice the loop</h3><p>Name it quietly: “I am overthinking.” Naming a thought gives you a little room to step back from it.</p></li>
+        <li><h3>Say it to God</h3><p>Pray the whole tangle out loud or on paper. He is not surprised, and He cares about it all.</p></li>
+        <li><h3>Test the thought</h3><p>Ask whether it is true, whether it is kind, and whether it is yours to carry. Let the rest go.</p></li>
+        <li><h3>Swap in a verse</h3><p>Choose one line of Scripture and repeat it slowly in place of the argument in your head.</p></li>
+        <li><h3>Do one small thing</h3><p>Take a walk, answer one message, wash a dish. A small act of obedience loosens the grip.</p></li>
+        <li><h3>Rest it again</h3><p>“Cast thy burden upon the LORD, and he shall sustain thee.” Hand it over as many times as you need.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band sun" id="community">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Community chat</p>
+        <h2>You are not walking alone</h2>
+        <p>Share a word of encouragement, ask for prayer, or tell what God has done. Believers from many countries, one family.</p>
+        <div class="orn"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom"/></svg></div>
+      </div>
+      <div class="com">
+        <div>
+          <div class="card" id="composerCard"></div>
+          <div class="filters" id="filters" role="group" aria-label="Filter messages">
+            <button type="button" data-k="all" aria-pressed="true">All</button>
+            <button type="button" data-k="encouragement" aria-pressed="false">Encouragement</button>
+            <button type="button" data-k="prayer" aria-pressed="false">Prayer requests</button>
+            <button type="button" data-k="testimony" aria-pressed="false">Testimonies</button>
+          </div>
+          <p class="note" id="chatNote" hidden></p>
+          <div class="msgs" id="chatList" aria-live="polite"></div>
+        </div>
+        <aside class="card">
+          <p class="eyebrow">Our circle</p>
+          <p class="stat" id="memberCount">—</p>
+          <p class="muted" id="memberLabel">believers have joined</p>
+          <h3 style="margin:20px 0 10px;font-size:1.5rem">Gentle ground rules</h3>
+          <ul class="guide">
+            <li>Speak with kindness. Encourage, never argue.</li>
+            <li>Pray for the request above yours before you post your own.</li>
+            <li>Keep personal details such as addresses and phone numbers out of the chat.</li>
+            <li>No advertising or links to sell things.</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Sit at the Lord’s Feet</span>
+    <p>“Draw nigh to God, and he will draw nigh to you.”</p>
+    <p class="small">Scripture quotations are from the King James Version, which is in the public domain. Music and book links open third-party sites.</p>
+  </div>
+</footer>
+
+<div class="scrim" id="authScrim" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="x" type="button" id="authClose" aria-label="Close">×</button>
+    <h2 id="authTitle">Welcome</h2>
+    <div class="seg" role="tablist">
+      <button type="button" role="tab" id="tabIn" aria-selected="true">Sign in</button>
+      <button type="button" role="tab" id="tabUp" aria-selected="false">Sign up</button>
+    </div>
+    <div class="pane" id="paneIn"></div>
+    <form id="formUp" hidden novalidate>
+      <div class="field"><label for="upName">Your name</label><input id="upName" name="name" maxlength="40" autocomplete="nickname" placeholder="First name or nickname" required></div>
+      <div class="field"><label for="upCountry">Country (optional)</label><input id="upCountry" name="country" maxlength="40" autocomplete="country-name" placeholder="Where you are joining from"></div>
+      <div class="field"><label for="upVerse">A verse you love (optional)</label><input id="upVerse" name="verse" maxlength="120" placeholder="For example, Psalm 23:1"></div>
+      <p class="err" id="upErr" hidden></p>
+      <button class="btn" type="submit" id="upBtn">Join the circle</button>
+      <p class="fine">Your profile is tied to your Claude sign-in. No password is created or stored on this site.</p>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function yt(q){return "https://www.youtube.com/results?search_query="+encodeURIComponent(q)}
+function sp(q){return "https://open.spotify.com/search/"+encodeURIComponent(q)}
+function gr(q){return "https://www.goodreads.com/search?q="+encodeURIComponent(q)}
+function bg(ref){return "https://www.biblegateway.com/passage/?search="+encodeURIComponent(ref.replace(/–/g,"-"))+"&version=KJV"}
+function refLink(ref){return '<a class="ref" href="'+bg(ref)+'" target="_blank" rel="noopener">'+ref+'</a>'}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+
+/* ---------- Verse of the day ---------- */
+var VOTD=[
+ ["Psalm 16:11","Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore."],
+ ["James 4:8","Draw nigh to God, and he will draw nigh to you."],
+ ["Lamentations 3:22–23","It is of the LORD’s mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness."],
+ ["Isaiah 41:10","Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee."],
+ ["Proverbs 3:5–6","Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."],
+ ["Psalm 119:105","Thy word is a lamp unto my feet, and a light unto my path."],
+ ["John 14:27","Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid."],
+ ["Hebrews 4:16","Let us therefore come boldly unto the throne of grace, that we may obtain mercy, and find grace to help in time of need."],
+ ["Jeremiah 29:13","And ye shall seek me, and find me, when ye shall search for me with all your heart."],
+ ["Psalm 62:1","Truly my soul waiteth upon God: from him cometh my salvation."],
+ ["Psalm 34:18","The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit."],
+ ["Matthew 11:28","Come unto me, all ye that labour and are heavy laden, and I will give you rest."]
+];
+(function(){
+  var d=new Date(), day=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()))/86400000);
+  var v=VOTD[day%VOTD.length];
+  $("#votdText").textContent=v[1];
+  $("#votdRef").innerHTML=refLink(v[0]);
+})();
+
+/* ---------- Readings ---------- */
+var READINGS=[
+ {id:"feet",title:"Sit at His feet",ref:"Luke 10:39–42",
+  verses:[[39,"And she had a sister called Mary, which also sat at Jesus’ feet, and heard his word."],[40,"But Martha was cumbered about much serving, and came to him, and said, Lord, dost thou not care that my sister hath left me to serve alone? bid her therefore that she help me."],[41,"And Jesus answered and said unto her, Martha, Martha, thou art careful and troubled about many things:"],[42,"But one thing is needful: and Mary hath chosen that good part, which shall not be taken away from her."]],
+  refl:["Martha was not wrong to serve. Jesus’ gentle answer was about where her heart had gone: she was anxious and pulled in many directions while the One she was serving sat in the next room. Mary did the simplest thing. She sat, and she listened.","Sitting at His feet is not laziness. It is the place everything else flows from. Before you plan the day, pray over it. Before you fix the problem, listen. The “one thing” is not a task to add to your list. It is a Person to stay near."],
+  pray:"Lord, slow me down. Teach me to sit before I serve, and to hear Your voice above my to-do list."},
+ {id:"shepherd",title:"The Shepherd who stays",ref:"Psalm 23:1–4",
+  verses:[[1,"The LORD is my shepherd; I shall not want."],[2,"He maketh me to lie down in green pastures: he leadeth me beside the still waters."],[3,"He restoreth my soul: he leadeth me in the paths of righteousness for his name’s sake."],[4,"Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."]],
+  refl:["David wrote as someone who knew sheep. Sheep cannot rest unless they feel safe, so lying down in green pastures is a picture of trust, not of having nothing to do. The Shepherd leads, restores and stays close.","Notice the shift in verse 4. In the pasture David speaks about God (“he”). In the dark valley he speaks to Him (“thou”). When the road is hardest, stop talking about God and start talking to Him."],
+  pray:"Shepherd of my soul, lead me today. In the green places I thank You, and in the dark valleys I will not fear, because You are with me."},
+ {id:"abide",title:"Abide in Him",ref:"John 15:4–5",
+  verses:[[4,"Abide in me, and I in you. As the branch cannot bear fruit of itself, except it abide in the vine; no more can ye, except ye abide in me."],[5,"I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing."]],
+  refl:["A branch does not strain to make fruit. It stays attached, and the life of the vine does the work. Jesus uses this picture to say that a fruitful life grows from closeness, not from effort alone.","Abiding is ordinary and daily: reading His word, praying as you walk, obeying the small prompt, coming back when you drift. If you feel dry, do not try harder first. Reconnect first."],
+  pray:"Jesus, I stay close to You today. Be the life in me, and make my small obedience fruitful."},
+ {id:"rest",title:"Come and rest",ref:"Matthew 11:28–30",
+  verses:[[28,"Come unto me, all ye that labour and are heavy laden, and I will give you rest."],[29,"Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls."],[30,"For my yoke is easy, and my burden is light."]],
+  refl:["Jesus does not say, “Come to me when you are put together.” He says come if you are tired and carrying too much. A yoke joins two animals so the load is shared. The invitation is to walk beside Him and learn His pace.","His rest is not an escape from responsibility. It is the lightness of not carrying everything alone, and of being led by someone gentle and humble in heart."],
+  pray:"Jesus, I am tired. I come to You with what I have been carrying. Teach me Your pace and give me rest for my soul."},
+ {id:"still",title:"Be still",ref:"Psalm 46:1, 10",
+  verses:[[1,"God is our refuge and strength, a very present help in trouble."],[10,"Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."]],
+  refl:["“Be still” can carry the sense of letting go, of loosening your grip. It sits in a psalm full of shaking mountains and roaring seas. God’s steadiness does not depend on calm circumstances.","Try it for two minutes. Put the phone down, breathe slowly, and repeat the verse, dropping a word each time until only “Be still” remains."],
+  pray:"Father, I let go. You are my refuge and my strength. Quiet my heart so I can know You."}
+];
+var curRead="feet";
+function renderReadings(){
+  var tabs=$("#readTabs"); tabs.innerHTML="";
+  READINGS.forEach(function(r){
+    var b=el("button","tab"); b.type="button"; b.setAttribute("role","tab"); b.id="rt-"+r.id;
+    b.setAttribute("aria-selected",r.id===curRead?"true":"false");
+    b.innerHTML="<b></b><span></span>"; b.firstChild.textContent=r.title; b.lastChild.textContent=r.ref;
+    b.addEventListener("click",function(){curRead=r.id;renderReadings()});
+    tabs.appendChild(b);
+  });
+  var r=READINGS.filter(function(x){return x.id===curRead})[0];
+  var p=$("#readPanel"); p.setAttribute("aria-labelledby","rt-"+r.id);
+  var html='<h3>'+r.title+'</h3><p class="refline">'+refLink(r.ref)+' <span class="muted">· King James Version</span></p><blockquote class="scripture" style="margin-left:0;margin-right:0">';
+  r.verses.forEach(function(v){html+='<span><sup>'+v[0]+'</sup>'+v[1]+'</span>'});
+  html+='</blockquote><h4>Reflection</h4><div class="refl">'+r.refl.map(function(t){return '<p>'+t+'</p>'}).join("")+'</div>';
+  html+='<div class="pray"><b>Pray it back</b>'+r.pray+'</div>';
+  p.innerHTML=html;
+}
+
+/* ---------- Music ---------- */
+var ARTISTS=[
+ {name:"We The Kingdom",tag:"Anthems of hope",note:"Warm, singable songs for mornings and long drives.",q:"We The Kingdom",start:[["Holy Water","We The Kingdom Holy Water"]]},
+ {name:"Josiah Queen",tag:"Honest and gentle",note:"Reflective songs that sit well with a journal and a quiet room.",q:"Josiah Queen"},
+ {name:"Abbie Gamboa",tag:"Soft and prayerful",note:"Gentle vocals for winding down at night.",q:"Abbie Gamboa"},
+ {name:"Claire Leslie · Strings and Hearts",tag:"Quiet and unhurried",note:"Slow, prayerful listening for still evenings.",q:"Claire Leslie Strings and Hearts"},
+ {name:"Hillsong",tag:"Congregational praise",note:"Songs made to be sung together, from hushed to full-throated.",q:"Hillsong Worship",start:[["Oceans (Where Feet May Fail)","Hillsong Oceans Where Feet May Fail"],["What a Beautiful Name","Hillsong What a Beautiful Name"]]},
+ {name:"Tiffany Hudson",tag:"Prayerful worship",note:"Worship you can pray along with.",q:"Tiffany Hudson"},
+ {name:"2819 Worship Team",tag:"Church family worship",note:"Worship from a church family, good for singing along.",q:"2819 Worship Team"},
+ {name:"Elevation Rhythm",tag:"Lifted spirits",note:"Fresh, modern worship for when you need your joy lifted.",q:"Elevation Rhythm"},
+ {name:"Chelsea Plank",tag:"Soft and sincere",note:"Simple worship songs for still moments.",q:"Chelsea Plank"}
+];
+function renderMusic(){
+  var g=$("#artistGrid"); g.innerHTML="";
+  ARTISTS.forEach(function(a){
+    var h='<article class="card artist"><p class="eyebrow"></p><h3><a href="'+yt(a.q+" worship")+'" target="_blank" rel="noopener"></a></h3><p class="muted"></p>';
+    if(a.start){h+='<ul class="songs">'+a.start.map(function(s){return '<li><span>'+s[0]+'</span><a href="'+yt(s[1])+'" target="_blank" rel="noopener">YouTube</a><a href="'+sp(s[1])+'" target="_blank" rel="noopener">Spotify</a></li>'}).join("")+'</ul>'}
+    h+='<div class="pills"><a class="pill" href="'+yt(a.q+" worship")+'" target="_blank" rel="noopener">YouTube ↗</a><a class="pill" href="'+sp(a.q)+'" target="_blank" rel="noopener">Spotify ↗</a></div></article>';
+    var w=document.createElement("div"); w.innerHTML=h; var art=w.firstChild;
+    art.querySelector(".eyebrow").textContent=a.tag; art.querySelector("h3 a").textContent=a.name; art.querySelector(".muted").textContent=a.note;
+    g.appendChild(art);
+  });
+}
+
+/* ---------- Books ---------- */
+var BOOKS=[
+ ["Mere Christianity","C. S. Lewis","A clear, warm case for the Christian faith, written for people with honest questions.","A classic"],
+ ["Knowing God","J. I. Packer","A thoughtful walk through who God is, and why knowing Him changes everything.","Go deeper"],
+ ["Anxious for Nothing","Max Lucado","Encouragement from Philippians 4 for a worried heart, in short, easy chapters.","For anxious days"],
+ ["Battlefield of the Mind","Joyce Meyer","Practical help for tangled thinking and learning to take thoughts to God.","For overthinking"],
+ ["The Practice of the Presence of God","Brother Lawrence","A short, old, lovely book on turning ordinary chores into conversation with God.","Short and quiet"],
+ ["My Utmost for His Highest","Oswald Chambers","A daily devotional that has fed readers for over a century.","Daily reading"],
+ ["Hinds’ Feet on High Places","Hannah Hurnard","An allegory of a fearful girl who follows the Shepherd to the heights.","A story for the soul"],
+ ["The Case for Christ","Lee Strobel","A journalist’s investigation of the evidence for Jesus, good for doubts and questions.","For doubters"],
+ ["The Pilgrim’s Progress","John Bunyan","A beloved journey of faith from the City of Destruction to the Celestial City.","A classic"]
+];
+function renderBooks(){
+  var g=$("#bookGrid"); g.innerHTML="";
+  BOOKS.forEach(function(b){
+    var a=el("article","card book");
+    a.appendChild(el("p","tagline",b[3])); a.appendChild(el("h3",null,b[0])); a.appendChild(el("p","by","by "+b[1])); a.appendChild(el("p","blurb",b[2]));
+    var pl=el("div","pills"); var l=el("a","pill","Find this book ↗"); l.href=gr(b[0]+" "+b[1]); l.target="_blank"; l.rel="noopener"; pl.appendChild(l); a.appendChild(pl);
+    g.appendChild(a);
+  });
+}
+
+/* ---------- Feelings ---------- */
+var FEELINGS=[
+ {k:"Anxious",line:"Your worry is not too heavy for Him. Say it plainly and leave it in His hands.",v:[["Philippians 4:6–7","Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."],["1 Peter 5:7","Casting all your care upon him; for he careth for you."]],p:"Father, I give You what I cannot control. Guard my mind with Your peace."},
+ {k:"Weary",line:"He invites the tired, not the finished. Rest is part of following Him.",v:[["Matthew 11:28","Come unto me, all ye that labour and are heavy laden, and I will give you rest."],["Isaiah 40:31","But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."]],p:"Lord, I am worn out. Renew my strength as I wait on You."},
+ {k:"Lonely",line:"You are seen. The One who made you has not stepped away.",v:[["Deuteronomy 31:6","Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee."],["Psalm 34:18","The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit."]],p:"God, help me feel Your nearness tonight, and lead me to people who will walk with me."},
+ {k:"Afraid",line:"Fear is real, and so is His presence. You can be afraid and held at the same time.",v:[["Isaiah 41:10","Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."],["Psalm 56:3","What time I am afraid, I will trust in thee."]],p:"Lord, when I am afraid I will trust You. Stay close and steady me."},
+ {k:"Discouraged",line:"A slow season is not a failed one. Keep going, one faithful step at a time.",v:[["Joshua 1:9","Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest."],["Galatians 6:9","And let us not be weary in well doing: for in due season we shall reap, if we faint not."]],p:"Father, lift my eyes. Give me courage for the next small step."},
+ {k:"Grieving",line:"Your tears matter to Him. You do not have to hurry through this.",v:[["Psalm 147:3","He healeth the broken in heart, and bindeth up their wounds."],["Matthew 5:4","Blessed are they that mourn: for they shall be comforted."]],p:"Comforter, sit with me in this sorrow. Bind up what is broken."},
+ {k:"Ashamed",line:"In Christ the case is closed. Come back to Him without hiding.",v:[["1 John 1:9","If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness."],["Romans 8:1","There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit."]],p:"Lord, I bring You everything. Thank You that Your mercy is bigger than my failure."},
+ {k:"Grateful",line:"Gratitude turns the heart back toward the Giver. Take a moment to say thank you.",v:[["Psalm 118:24","This is the day which the LORD hath made; we will rejoice and be glad in it."],["1 Thessalonians 5:16–18","Rejoice evermore. Pray without ceasing. In every thing give thanks: for this is the will of God in Christ Jesus concerning you."]],p:"Father, thank You. Open my eyes to notice every good thing You have given."},
+ {k:"Doubting",line:"Honest doubt can be brought to Him. Ask, and keep asking.",v:[["Mark 9:24","And straightway the father of the child cried out, and said with tears, Lord, I believe; help thou mine unbelief."],["James 1:5","If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him."]],p:"Lord, I believe. Help my unbelief, and show me more of You."},
+ {k:"Seeking direction",line:"He is a faithful guide. Take the next step you can see.",v:[["Proverbs 3:5–6","Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."],["Psalm 119:105","Thy word is a lamp unto my feet, and a light unto my path."]],p:"Father, light the next step. I trust You with the path ahead."}
+];
+var curFeel=FEELINGS[0].k;
+function renderFeelings(){
+  var c=$("#feelChips"); c.innerHTML="";
+  FEELINGS.forEach(function(f){
+    var b=el("button","chip",f.k); b.type="button"; b.setAttribute("aria-pressed",f.k===curFeel?"true":"false");
+    b.addEventListener("click",function(){curFeel=f.k;renderFeelings()}); c.appendChild(b);
+  });
+  var f=FEELINGS.filter(function(x){return x.k===curFeel})[0];
+  var h='<p class="lead"></p><div class="vcards">';
+  f.v.forEach(function(v){h+='<div class="card"><blockquote>'+v[1]+'</blockquote>'+refLink(v[0])+'</div>'});
+  h+='</div><div class="pray" style="max-width:760px"><b>A short prayer</b><span id="fp"></span></div>';
+  var p=$("#feelPanel"); p.innerHTML=h; p.querySelector(".lead").textContent=f.line; $("#fp").textContent=f.p;
+}
+
+/* ---------- Overthinking tool ---------- */
+var STEPS=["Take a slow walk around the block and pray as you go.","Send one kind message to someone.","Wash a few dishes and thank God for each one.","Write down the next small thing you can actually do.","Read Psalm 23 out loud.","Drink a glass of water and breathe slowly for one minute."];
+$("#layBtn").addEventListener("click",function(){
+  $("#worry").value="";
+  $("#smallStep").textContent=STEPS[Math.floor(Math.random()*STEPS.length)];
+  $("#layForm").hidden=true; $("#laid").hidden=false;
+});
+$("#againBtn").addEventListener("click",function(){ $("#laid").hidden=true; $("#layForm").hidden=false; $("#worry").focus(); });
+
+/* ---------- Account + community ---------- */
+var LS_P="slf.profile", LS_IN="slf.signedin";
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}}
+var S={profile:null,signedIn:false,uid:null,canWrite:null,isOwner:false,db:null,dbReady:false,members:new Map(),chat:new Map(),filter:"all",busy:false,kind:"encouragement"};
+try{var lp=lsGet(LS_P); if(lp){var pp=JSON.parse(lp); if(pp&&typeof pp.name==="string")S.profile=pp}}catch(e){}
+S.signedIn=lsGet(LS_IN)==="1"&&!!S.profile;
+
+function initial(n){n=(n||"").trim();return n?n.charAt(0).toUpperCase():"•"}
+function toast(t){var x=$("#toast");x.textContent=t;x.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){x.hidden=true},3800)}
+
+function renderAuth(){
+  var a=$("#authArea"); a.innerHTML="";
+  if(S.signedIn&&S.profile){
+    var w=el("div","who"); w.appendChild(el("span","dot",initial(S.profile.name))); w.appendChild(el("span","who-name",S.profile.name));
+    var o=el("button","btn small ghost","Sign out"); o.type="button"; o.addEventListener("click",function(){S.signedIn=false;lsSet(LS_IN,null);renderAll();toast("You are signed out.")});
+    a.appendChild(w); a.appendChild(o);
+  } else {
+    var i=el("button","btn small ghost","Sign in"); i.type="button"; i.addEventListener("click",function(){openAuth("in")});
+    var u=el("button","btn small show-wide","Sign up"); u.type="button"; u.addEventListener("click",function(){openAuth("up")});
+    a.appendChild(i); a.appendChild(u);
+  }
+  var wl=$("#welcome");
+  if(S.signedIn&&S.profile){wl.hidden=false;wl.textContent="Welcome back, "+S.profile.name+". Peace to you today."}else{wl.hidden=true}
+}
+
+var lastFocus=null;
+function setTab(which){
+  var isIn=which==="in";
+  $("#tabIn").setAttribute("aria-selected",isIn?"true":"false"); $("#tabUp").setAttribute("aria-selected",isIn?"false":"true");
+  $("#paneIn").hidden=!isIn; $("#formUp").hidden=isIn;
+  $("#authTitle").textContent=isIn?"Welcome back":"Join us";
+  if(isIn) renderSignIn();
+  setTimeout(function(){var f=isIn?$("#paneIn button"):$("#upName"); if(f)f.focus()},30);
+}
+function renderSignIn(){
+  var p=$("#paneIn"); p.innerHTML="";
+  if(S.profile){
+    p.appendChild(el("p",null,"Good to see you, "+S.profile.name+"."));
+    var b=el("button","btn","Continue"); b.type="button"; b.addEventListener("click",function(){S.signedIn=true;lsSet(LS_IN,"1");closeAuth();renderAll();toast("Welcome back, "+S.profile.name+".")});
+    p.appendChild(b);
+    p.appendChild(el("p","fine","This profile is tied to your Claude sign-in. No password is used on this site."));
+  } else {
+    p.appendChild(el("p",null,"We could not find a profile for you yet."));
+    var c=el("button","btn","Create one"); c.type="button"; c.addEventListener("click",function(){setTab("up")});
+    p.appendChild(c);
+    p.appendChild(el("p","fine","Joining takes a name and a few seconds. No password is needed."));
+  }
+}
+function openAuth(which){
+  lastFocus=document.activeElement; $("#authScrim").hidden=false; setTab(which||"in");
+}
+function closeAuth(){ $("#authScrim").hidden=true; $("#upErr").hidden=true; if(lastFocus&&lastFocus.focus)lastFocus.focus(); }
+$$("[data-open-auth]").forEach(function(b){b.addEventListener("click",function(){openAuth(b.getAttribute("data-open-auth"))})});
+$("#authClose").addEventListener("click",closeAuth);
+$("#authScrim").addEventListener("click",function(e){if(e.target===this)closeAuth()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#authScrim").hidden)closeAuth()});
+$("#tabIn").addEventListener("click",function(){setTab("in")});
+$("#tabUp").addEventListener("click",function(){setTab("up")});
+
+$("#formUp").addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=$("#upName").value.trim(), country=$("#upCountry").value.trim(), verse=$("#upVerse").value.trim(), err=$("#upErr");
+  if(name.length<2){err.textContent="Please enter a name of at least two letters.";err.hidden=false;$("#upName").focus();return}
+  err.hidden=true;
+  var prof={name:name.slice(0,40),country:country.slice(0,40),verse:verse.slice(0,120),joined:Date.now()};
+  var btn=$("#upBtn"); btn.disabled=true;
+  var done=function(saved){
+    S.profile=prof;S.signedIn=true;lsSet(LS_P,JSON.stringify(prof));lsSet(LS_IN,"1");
+    btn.disabled=false;closeAuth();renderAll();
+    toast(saved?"Welcome to the circle, "+prof.name+".":"Welcome, "+prof.name+". Saved on this device only for now.");
+  };
+  if(S.db&&S.uid){
+    S.db.doc("members/"+S.uid).set(prof).then(function(){done(true)},function(){done(false)});
+  } else done(false);
+});
+
+/* chat */
+function relTime(ts){
+  var s=Math.max(0,(Date.now()-ts)/1000);
+  if(s<60)return "just now"; if(s<3600)return Math.floor(s/60)+" min ago"; if(s<86400)return Math.floor(s/3600)+" h ago";
+  return new Date(ts).toLocaleDateString(undefined,{month:"short",day:"numeric"});
+}
+var KIND_LABEL={encouragement:"Encouragement",prayer:"Prayer request",testimony:"Testimony"};
+function renderComposer(){
+  var c=$("#composerCard"); c.innerHTML="";
+  var msg=null,btn=null;
+  if(!S.signedIn||!S.profile){
+    c.appendChild(el("p","eyebrow","Join the conversation"));
+    c.appendChild(el("p",null,"Sign in or create a free profile to post. You can read everything below without one."));
+    var row=el("div","cta"); var a=el("button","btn small","Sign up"); a.type="button"; a.addEventListener("click",function(){openAuth("up")});
+    var b=el("button","btn small ghost","Sign in"); b.type="button"; b.addEventListener("click",function(){openAuth("in")}); row.appendChild(a); row.appendChild(b); c.appendChild(row); return;
+  }
+  if(!S.dbReady||!S.uid){
+    c.appendChild(el("p","eyebrow","Chat is offline here"));
+    c.appendChild(el("p",null,"Posting needs this page to be opened with your Claude sign-in. Your reading, music and encouragement sections work as usual."));
+    return;
+  }
+  if(S.canWrite===false){
+    c.appendChild(el("p","eyebrow","Read-only for now"));
+    c.appendChild(el("p",null,"Posting is open to invited members. Ask the site owner to invite you as a contributor, and you will be able to share here."));
+    return;
+  }
+  var f=el("form"); f.noValidate=true;
+  var kinds=el("div","kinds"); kinds.setAttribute("role","radiogroup"); kinds.setAttribute("aria-label","Type of message");
+  ["encouragement","prayer","testimony"].forEach(function(k){
+    var l=el("label"); var i=el("input"); i.type="radio"; i.name="kind"; i.value=k; i.checked=(S.kind===k); i.addEventListener("change",function(){S.kind=k});
+    l.appendChild(i); l.appendChild(el("span",null,KIND_LABEL[k])); kinds.appendChild(l);
+  });
+  f.appendChild(kinds);
+  var ta=el("textarea"); ta.id="chatText"; ta.maxLength=500; ta.placeholder="Share a word of encouragement, a prayer request, or what God has been doing…"; ta.setAttribute("aria-label","Your message");
+  f.appendChild(ta);
+  var row=el("div","row"); row.style.cssText="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px";
+  var pb=el("button","btn small","Post"); pb.type="submit"; var cnt=el("span","counter","0 / 500");
+  ta.addEventListener("input",function(){cnt.textContent=ta.value.length+" / 500"});
+  row.appendChild(pb); row.appendChild(cnt); f.appendChild(row);
+  var er=el("p","err"); er.hidden=true; f.appendChild(er);
+  f.addEventListener("submit",function(e){
+    e.preventDefault(); var t=ta.value.trim();
+    if(t.length<2){er.textContent="Write a little more before posting.";er.hidden=false;return}
+    er.hidden=true; pb.disabled=true;
+    postMsg(S.kind,t).then(function(ok){pb.disabled=false; if(ok){ta.value="";cnt.textContent="0 / 500";toast("Posted. Thank you for encouraging others.")} else {er.textContent="We could not post that just now. Please try again in a moment.";er.hidden=false}});
+  });
+  c.appendChild(f);
+}
+function postMsg(kind,text){
+  if(S.busy||!S.db||!S.uid) return Promise.resolve(false);
+  S.busy=true;
+  var cur=(S.chat.get(S.uid)||[]).slice();
+  cur.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),kind:kind,text:text,ts:Date.now()});
+  var next=cur.slice(-40);
+  return S.db.doc("chat/"+S.uid).set({msgs:next}).then(function(){S.busy=false;return true},function(){S.busy=false;return false});
+}
+function removeMsg(uid,id){
+  if(S.busy||!S.db) return;
+  var next=(S.chat.get(uid)||[]).filter(function(m){return m.id!==id});
+  S.busy=true;
+  S.db.doc("chat/"+uid).set({msgs:next}).then(function(){S.busy=false;toast("Message removed.")},function(){S.busy=false;toast("Could not remove that message.")});
+}
+function renderChat(){
+  var list=$("#chatList"); list.innerHTML="";
+  var all=[];
+  S.chat.forEach(function(msgs,uid){msgs.forEach(function(m){all.push({uid:uid,id:m.id,kind:m.kind,text:m.text,ts:m.ts})})});
+  all=all.filter(function(m){return S.filter==="all"||m.kind===S.filter}).sort(function(a,b){return b.ts-a.ts}).slice(0,60);
+  if(!all.length){
+    var msg=S.dbReady?(S.filter==="all"?"No messages yet. Be the first to say hello, share an encouragement, or ask for prayer.":"Nothing here yet in this group."):"Messages from the community will appear here when the chat is connected.";
+    list.appendChild(el("p","empty",msg)); return;
+  }
+  all.forEach(function(m){
+    var mem=S.members.get(m.uid)||{}; var name=(typeof mem.name==="string"&&mem.name)?mem.name:"A fellow believer";
+    var art=el("article","msg"); art.appendChild(el("span","dot",initial(name)));
+    var meta=el("div","meta"); meta.appendChild(el("b",null,name));
+    if(typeof mem.country==="string"&&mem.country) meta.appendChild(el("span","when",mem.country));
+    meta.appendChild(el("span","when",relTime(Number(m.ts)||0)));
+    art.appendChild(meta);
+    var body=el("div"); body.appendChild(el("p","body",String(m.text||"").slice(0,500)));
+    var foot=el("div","foot"); var k=(m.kind==="prayer"||m.kind==="testimony")?m.kind:"encouragement";
+    foot.appendChild(el("span","tag "+k,KIND_LABEL[k]));
+    if(S.uid&&(m.uid===S.uid||S.isOwner)){var rb=el("button","linkbtn","Remove"); rb.type="button"; rb.addEventListener("click",function(){removeMsg(m.uid,m.id)}); foot.appendChild(rb)}
+    body.appendChild(foot); art.appendChild(body); list.appendChild(art);
+  });
+}
+$$("#filters button").forEach(function(b){b.addEventListener("click",function(){
+  S.filter=b.getAttribute("data-k"); $$("#filters button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")}); renderChat();
+})});
+function renderMembers(){
+  var n=S.members.size; $("#memberCount").textContent=S.dbReady?String(n):"—";
+  $("#memberLabel").textContent=n===1?"believer has joined":"believers have joined";
+}
+function setNote(t){var n=$("#chatNote"); if(t){n.textContent=t;n.hidden=false}else n.hidden=true}
+function renderAll(){renderAuth();renderComposer();renderChat();renderMembers()}
+
+function startDb(){
+  var db=S.db, timer=setTimeout(function(){setNote("Still trying to reach the community. It may be offline right now.")},10000);
+  var clear=function(snap){if(snap&&snap.metadata&&!snap.metadata.fromCache){clearTimeout(timer);setNote("")}};
+  db.collection("members").onSnapshot(function(snap){
+    clear(snap); S.members=new Map();
+    snap.docs.forEach(function(d){var v=d.data(); if(v&&typeof v==="object")S.members.set(d.id,v)});
+    if(S.uid&&S.members.has(S.uid)){S.profile=S.members.get(S.uid);lsSet(LS_P,JSON.stringify(S.profile))}
+    S.dbReady=true; renderAll();
+  },function(){clearTimeout(timer);setNote("The community could not be loaded right now.");renderAll()});
+  db.collection("chat").onSnapshot(function(snap){
+    clear(snap); S.chat=new Map();
+    snap.docs.forEach(function(d){var v=d.data(); if(v&&Array.isArray(v.msgs)){S.chat.set(d.id,v.msgs.filter(function(m){return m&&typeof m.text==="string"&&typeof m.id==="string"}))}});
+    S.dbReady=true; renderChat(); renderComposer();
+  },function(){clearTimeout(timer);setNote("The chat could not be loaded right now.")});
+}
+function initCaps(){
+  if(!window.claude||typeof window.claude.use!=="function") return;
+  Promise.all([window.claude.use("user"),window.claude.use("db")]).then(function(r){
+    var user=r[0],db=r[1];
+    var p=user?Promise.all([user.id(),user.isOwner(),user.can("data.write")]):Promise.resolve([null,false,null]);
+    return p.then(function(u){S.uid=u[0];S.isOwner=!!u[1];S.canWrite=u[2];if(db){S.db=db;startDb()}renderAll()});
+  }).catch(function(){});
+}
+
+renderReadings(); renderMusic(); renderBooks(); renderFeelings(); renderAll(); initCaps();
+})();
+</script>
+</body>
+</html>
